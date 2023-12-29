@@ -18,6 +18,7 @@ const promiseBasedFunction = (arr) => {
       const error = new Error("Array is empty");
       reject(error);
     } else {
+      // callback based function
       setTimeout(() => {
         const sortedArray = sortArrayFunction(arr);
         resolve(sortedArray);
