@@ -44,3 +44,15 @@ fetchDataFromServer(apiUrl, (error, data) => {
   }
 });
 
+
+or
+
+const callback = (error, data) => {
+  if (error) {
+    console.error('Error fetching data:', error);
+  } else {
+    console.log('Data from the server:', data);
+  }
+}
+fetchDataFromServer(apiUrl, callback);
+
