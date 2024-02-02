@@ -38,3 +38,42 @@ async function performOperations() {
 }
 
 performOperations();
+
+
+
+
+
+// another example
+
+
+const axios = require('axios');
+
+// Function to fetch data from a URL using async/await
+async function fetchData(url) {
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    throw error.message;
+  }
+}
+
+// Async/Await example
+async function fetchDataExample() {
+  try {
+    const post = await fetchData('https://jsonplaceholder.typicode.com/posts/1');
+    console.log('Post:', post);
+
+    const user = await fetchData(`https://jsonplaceholder.typicode.com/users/${post.userId}`);
+    console.log('User:', user);
+
+    const comments = await fetchData(`https://jsonplaceholder.typicode.com/comments?postId=${post.id}`);
+    console.log('Comments:', comments);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+// Calling the async function
+fetchDataExample();
+
