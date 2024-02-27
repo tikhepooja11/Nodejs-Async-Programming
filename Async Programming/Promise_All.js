@@ -61,3 +61,18 @@ async function getNumDraws(year) {
         throw error;
     }
 }
+
+
+ const result = responses.reduce((totalDrawMatches, response)=>{
+            const apiData = response.data;
+    
+    // Use reduce to directly count draw matches without creating an array
+    totalDrawMatches += apiData.data.reduce((count, match) => {
+        if (match.team1goals === match.team2goals) {
+            return count + 1;
+        }
+        return count;
+    }, 0);
+
+    return totalDrawMatches;
+        },0)
