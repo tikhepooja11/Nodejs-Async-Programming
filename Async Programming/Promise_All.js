@@ -33,3 +33,31 @@ promiseAllExample(urls)
   .catch((error) => {
     console.log(error);
   });
+
+
+
+
+
+async function getNumDraws(year) {
+    try {
+        let totalDrawMatches = 0;
+        let promises = []
+        for (let page = 1; page <= 196; page++) {
+            const promise =  axios.get(`https://jsonmock.hackerrank.com/api/football_matches?year=${year}&page=${page}`);
+            promises.push(promise)
+        }
+        
+        const responses = await Promise.all(promises)
+            for (const response of responses) {
+            const apiData = response.data;
+            const drawMatches = apiData.data.filter(match => match.team1goals === match.team2goals);
+            totalDrawMatches += drawMatches.length;
+        }
+
+        return totalDrawMatches;
+    } catch (error) {
+        console.error(error);
+        // Handle or throw the error as needed
+        throw error;
+    }
+}
